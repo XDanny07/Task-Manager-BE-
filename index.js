@@ -6,17 +6,18 @@ const historyRoutes = require("./routes/taskHistory");
 const { configDotenv } = require("dotenv");
 const cors = require("cors");
 const app = express();
-app.options("*", cors());
-app.use(
-  cors({
-    origin: "https://task-manager-dun-two.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-  })
-);
+
+app.use(cors());
 const PORT = 3000;
 configDotenv();
 
+app.use((err, req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://task-manager-dun-two.vercel.app"
+  );
+  res.status(500).json({ error: "Internal Server Error" });
+});
 // Middleware
 app.use(bodyParser.json());
 // Routes
