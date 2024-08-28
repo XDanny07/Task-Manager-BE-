@@ -6,11 +6,12 @@ const historyRoutes = require("./routes/taskHistory");
 const { configDotenv } = require("dotenv");
 const cors = require("cors");
 const app = express();
+app.options("*", cors());
+app.use(cors());
 const PORT = 3000;
 configDotenv();
 
 // Middleware
-app.use(cors());
 app.use(bodyParser.json());
 // Routes
 app.use("/api/tasks", taskRoutes);
