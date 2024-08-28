@@ -7,7 +7,13 @@ const { configDotenv } = require("dotenv");
 const cors = require("cors");
 const app = express();
 app.options("*", cors());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://task-manager-dun-two.vercel.app",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
 const PORT = 3000;
 configDotenv();
 
