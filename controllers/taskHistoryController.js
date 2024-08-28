@@ -1,6 +1,5 @@
 const TaskHistory = require("../models/taskHistory");
 
-// Fetch history for a specific task
 exports.getTaskHistory = async (req, res) => {
   try {
     const history = await TaskHistory.find({ taskId: req.params.taskId });

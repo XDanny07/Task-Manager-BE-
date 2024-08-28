@@ -8,14 +8,13 @@ const cors = require("cors");
 const PORT = 3000;
 configDotenv();
 
-// Middleware
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-// Routes
+
 app.use("/api/tasks", taskRoutes);
 app.use("/api/history", historyRoutes);
-// Start the server
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

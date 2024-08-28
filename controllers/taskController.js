@@ -1,6 +1,6 @@
 const Task = require("../models/taskModel");
 const TaskHistory = require("../models/taskHistory");
-// Get all tasks
+
 exports.getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.find();
@@ -10,7 +10,6 @@ exports.getAllTasks = async (req, res) => {
   }
 };
 
-// Add a new task
 exports.addTask = async (req, res) => {
   const { name, priority, description, duedate, status } = req.body;
 
@@ -45,7 +44,6 @@ exports.addTask = async (req, res) => {
   }
 };
 
-// Update a single task
 exports.updateTask = async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
@@ -67,15 +65,12 @@ exports.updateTask = async (req, res) => {
       }
     }
 
-    const updatedTask = await Task.findByIdAndUpdate(
-      id,
-      updatedData,
-      { new: true } // Return the updated document
-    );
+    const updatedTask = await Task.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
     try {
       let history = await TaskHistory.findOne({ taskId: id });
 
-      // Append the update to the existing history
       if (updatedFields.length > 0) {
         history.history.push({
           action: "updated",
@@ -94,7 +89,6 @@ exports.updateTask = async (req, res) => {
   }
 };
 
-// Delete a task
 exports.deleteTask = async (req, res) => {
   const { id } = req.params;
 
