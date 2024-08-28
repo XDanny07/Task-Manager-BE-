@@ -16,7 +16,6 @@ app.use((err, req, res, next) => {
     "Access-Control-Allow-Origin",
     "https://task-manager-dun-two.vercel.app"
   );
-  res.status(500).json({ error: "Internal Server Error" });
 });
 // Middleware
 app.use(bodyParser.json());
